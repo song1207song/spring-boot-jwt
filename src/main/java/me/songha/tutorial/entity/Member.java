@@ -16,32 +16,32 @@ import java.util.Set;
 public class Member {
 
    @Id
-   @Column(name = "ID")
+   @Column(name = "id")
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @Column(name = "USERNAME", length = 50, unique = true)
+   @Column(name = "username", length = 50, unique = true)
    private String username;
 
-   @Column(name = "PASSWORD", length = 100)
+   @Column(name = "password", length = 100)
    private String password;
 
-   @Column(name = "NICKNAME", length = 50)
+   @Column(name = "nickname", length = 50)
    private String nickname;
 
-   @Column(name = "STATUS")
-   private int status;
+   @Column(name = "status")
+   private byte status;
 
-   @Column(name = "INSERT_DATE")
+   @Column(name = "insert_date")
    private ZonedDateTime insertDate;
 
-   @Column(name = "UPDATE_DATE")
+   @Column(name = "update_date")
    private ZonedDateTime updateDate;
 
    @ManyToMany
    @JoinTable(
       name = "USER_AUTHORITY",
-      joinColumns = {@JoinColumn(name = "MEMBER_ID", referencedColumnName = "ID")},
-      inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_NAME", referencedColumnName = "NAME")})
+      joinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "id")},
+      inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
    private Set<Authority> authorities;
 }
