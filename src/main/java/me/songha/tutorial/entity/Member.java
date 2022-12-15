@@ -15,33 +15,33 @@ import java.util.Set;
 @NoArgsConstructor
 public class Member {
 
-   @Id
-   @Column(name = "id")
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-   @Column(name = "username", length = 50, unique = true)
-   private String username;
+    @Column(name = "username", length = 50, unique = true)
+    private String username;
 
-   @Column(name = "password", length = 100)
-   private String password;
+    @Column(name = "password", length = 100)
+    private String password;
 
-   @Column(name = "nickname", length = 50)
-   private String nickname;
+    @Column(name = "nickname", length = 50)
+    private String nickname;
 
-   @Column(name = "status")
-   private byte status;
+    @Column(name = "status")
+    private byte status;
 
-   @Column(name = "insert_date")
-   private ZonedDateTime insertDate;
+    @Column(name = "insert_date")
+    private ZonedDateTime insertDate;
 
-   @Column(name = "update_date")
-   private ZonedDateTime updateDate;
+    @Column(name = "update_date")
+    private ZonedDateTime updateDate;
 
-   @ManyToMany
-   @JoinTable(
-      name = "USER_AUTHORITY",
-      joinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "id")},
-      inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
-   private Set<Authority> authorities;
+    @ManyToMany
+    @JoinTable(
+            name = "USER_AUTHORITY",
+            joinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
+    private Set<Authority> authorities;
 }
