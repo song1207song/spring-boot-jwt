@@ -7,34 +7,26 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.Set;
 
 @Entity
-@Table(name = "MEMBER")
+@Table(name = "MEMBER_AUTHORITY")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Member {
-
+public class MemberAuthority {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USERNAME", length = 50, unique = true)
-    private String username;
+    @Column(name = "MEMBER_ID")
+    private Long memberId;
 
-    @Column(name = "PASSWORD", length = 100)
-    private String password;
-
-    @Column(name = "NICKNAME", length = 50)
-    private String nickname;
-
-    @Column(name = "STATUS")
-    private byte status;
+    @Column(name = "AUTHORITY_NAME", length = 50)
+    private String authorityName;
 
     @CreatedDate
     @Column(name = "INSERT_DATE")
@@ -44,6 +36,11 @@ public class Member {
     @Column(name = "UPDATE_DATE")
     private ZonedDateTime updateDate;
 
-    @OneToMany(mappedBy = "member")
-    private Set<MemberAuthority> memberAuthorities;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID",insertable = false, updatable = false)
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "AUTHORITY_NAME",insertable = false, updatable = false)
+    private Authority authority;
 }

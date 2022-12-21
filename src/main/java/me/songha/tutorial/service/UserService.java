@@ -24,6 +24,9 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private static final byte STATUS_ACTIVATED = 1;
 
+    /**
+     * 회원가입
+     */
     @Transactional
     public MemberDto signup(MemberDto userDto) {
         if (memberRepository.findFirstWithMemberAuthoritiesByUsername(userDto.getUsername()).orElse(null) != null) {
@@ -34,8 +37,6 @@ public class UserService {
                 .username(userDto.getUsername())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .nickname(userDto.getNickname())
-//                .memberAuthorities(Collections.singleton(memberAuthority))
-//                .authorities(Collections.singleton(authority))
                 .status(STATUS_ACTIVATED)
                 .build();
 
@@ -45,8 +46,6 @@ public class UserService {
         MemberAuthority memberAuthority = MemberAuthority.builder()
                 .memberId(savedMember.getId())
                 .authorityName(authority.getAuthorityName())
-//                .authority(authority)
-//                .member(savedMember)
                 .build();
         MemberAuthority savedMemberAuthority = memberAuthorityRepository.save(memberAuthority);
 

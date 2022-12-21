@@ -2,10 +2,8 @@ package me.songha.tutorial.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "AUTHORITY")
@@ -17,7 +15,9 @@ import javax.persistence.Table;
 public class Authority {
 
     @Id
-    @Column(name = "name", length = 50)
+    @Column(name = "NAME", length = 50)
     private String authorityName;
 
+    @OneToMany(mappedBy = "authority")
+    private Set<MemberAuthority> memberAuthorities;
 }
