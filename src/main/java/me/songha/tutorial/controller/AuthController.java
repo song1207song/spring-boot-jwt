@@ -32,6 +32,7 @@ public class AuthController {
     @PostMapping("/authenticate")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
         // 로그인 정보를 이용해 authenticationToken 객체를 생성한다.
+        // UsernamePasswordAuthenticationToken 객체 생성 시 커스텀한 JwtFilter의 doFilter를 거친다.
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
